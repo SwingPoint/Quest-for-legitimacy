@@ -733,11 +733,285 @@ export default function Page() {
 
           {/* Generated Code Display - WordPress JSON */}
           {generatedJSON && outputFormat === 'wordpress' && (
-            <div className="mt-8 p-6 bg-gray-50 rounded-lg border-2 border-green-200">
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-bold text-gray-800">
-                  🔌 WordPress JSON - Ready to Copy!
+            <div className="mt-8 space-y-6">
+              
+              {/* WordPress Installation Instructions */}
+              <div className="p-6 bg-blue-50 rounded-lg border-2 border-blue-300">
+                <h2 className="text-2xl font-bold text-gray-800 mb-4">
+                  📦 WordPress Installation - 3 Files Needed
                 </h2>
+                <p className="text-sm text-gray-700 mb-4">
+                  To display your property listing in WordPress, you need to copy 3 things:
+                </p>
+                <ol className="list-decimal list-inside space-y-2 text-sm text-gray-700 mb-4">
+                  <li><strong>PHP Code</strong> - Add to WordPress functions.php or Code Snippets plugin</li>
+                  <li><strong>CSS Styles</strong> - Add to Appearance → Customize → Additional CSS</li>
+                  <li><strong>JSON Data</strong> - Add to your page as a custom field or content</li>
+                </ol>
+                <p className="text-xs text-blue-800 font-semibold">
+                  👇 Scroll down to copy each file in order
+                </p>
+              </div>
+
+              {/* Step 1: PHP Code */}
+              <div className="p-6 bg-purple-50 rounded-lg border-2 border-purple-300">
+                <div className="flex justify-between items-center mb-4">
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-800">
+                      Step 1️⃣: Copy PHP Code
+                    </h3>
+                    <p className="text-sm text-gray-600 mt-1">
+                      Add this to WordPress → Appearance → Theme File Editor → functions.php
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => {
+                      const phpCode = `<?php
+/**
+ * Property Listing Shortcode for WordPress
+ * Add this code to your theme's functions.php file
+ */
+
+function property_listing_shortcode($atts) {
+    $atts = shortcode_atts(array(
+        'field' => 'property_listing_json',
+    ), $atts);
+    
+    $json_data = get_post_meta(get_the_ID(), $atts['field'], true);
+    
+    if (empty($json_data)) {
+        return '<p style="color:red;">No property listing data found. Add JSON to custom field: property_listing_json</p>';
+    }
+    
+    $listing = json_decode($json_data, true);
+    if (!$listing) {
+        return '<p style="color:red;">Error parsing JSON data.</p>';
+    }
+    
+    $price = '$' . number_format($listing['price']);
+    
+    ob_start();
+    ?>
+    <div class="property-listing-container">
+        <div class="property-hero" style="background-image: url('<?php echo esc_url($listing['heroPhoto']['url']); ?>');">
+            <div class="property-hero-overlay">
+                <div class="property-hero-content">
+                    <h1 class="property-title"><?php echo esc_html($listing['title']); ?></h1>
+                    <p class="property-price"><?php echo esc_html($price); ?></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="property-content-wrapper">
+            <div class="property-main-content">
+                <div class="property-stats-card">
+                    <div class="property-stats-grid">
+                        <div class="property-stat">
+                            <span class="stat-label">Beds</span>
+                            <span class="stat-value"><?php echo esc_html($listing['beds']); ?></span>
+                        </div>
+                        <div class="property-stat">
+                            <span class="stat-label">Baths</span>
+                            <span class="stat-value"><?php echo esc_html($listing['baths']); ?></span>
+                        </div>
+                        <div class="property-stat">
+                            <span class="stat-label">Living Area</span>
+                            <span class="stat-value"><?php echo esc_html(number_format($listing['livingAreaSqFt'])); ?></span>
+                            <span class="stat-unit">sq ft</span>
+                        </div>
+                        <div class="property-stat">
+                            <span class="stat-label">Lot Size</span>
+                            <span class="stat-value"><?php echo esc_html(number_format($listing['lotSizeSqFt'])); ?></span>
+                            <span class="stat-unit">sq ft</span>
+                        </div>
+                    </div>
+                    <div class="property-details-footer">
+                        <p><strong>Built:</strong> <?php echo esc_html($listing['yearBuilt']); ?> • <strong>Type:</strong> <?php echo esc_html($listing['propertyType']); ?></p>
+                        <p><strong>Address:</strong> <?php echo esc_html($listing['address']['streetAddress']); ?>, <?php echo esc_html($listing['address']['addressLocality']); ?>, <?php echo esc_html($listing['address']['addressRegion']); ?> <?php echo esc_html($listing['address']['postalCode']); ?></p>
+                    </div>
+                </div>
+                
+                <div class="property-card">
+                    <h2>About This Property</h2>
+                    <p><?php echo esc_html($listing['storyIntro']); ?></p>
+                </div>
+                
+                <div class="property-card">
+                    <h2>Key Features</h2>
+                    <ul class="property-features-list">
+                        <?php foreach ($listing['features'] as $feature): ?>
+                            <li class="property-feature">
+                                <svg class="feature-icon" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span><?php echo esc_html($feature); ?></span>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+                
+                <?php if (!empty($listing['gallery'])): ?>
+                <div class="property-card">
+                    <h2>Photo Gallery</h2>
+                    <div class="property-gallery">
+                        <?php foreach ($listing['gallery'] as $photo): ?>
+                            <div class="gallery-item">
+                                <img src="<?php echo esc_url($photo['url']); ?>" alt="<?php echo esc_attr($photo['alt']); ?>">
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <?php endif; ?>
+                
+                <div class="property-card">
+                    <h2>About <?php echo esc_html($listing['neighborhoodName']); ?></h2>
+                    <h3>Points of Interest</h3>
+                    <ul class="property-poi-list">
+                        <?php foreach ($listing['pointsOfInterest'] as $poi): ?>
+                            <li class="property-poi">
+                                <svg class="poi-icon" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span><?php echo esc_html($poi['name']); ?> - <?php echo esc_html($poi['minutesAway']); ?> min</span>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="property-sidebar">
+                <div class="property-agent-card">
+                    <h2>Contact Agent</h2>
+                    <div class="agent-info">
+                        <p class="agent-name"><?php echo esc_html($listing['agent']['name']); ?></p>
+                        <p class="agent-title"><?php echo esc_html($listing['agent']['jobTitle']); ?></p>
+                        <p class="agent-company"><?php echo esc_html($listing['agent']['brokerage']['name']); ?></p>
+                    </div>
+                    <div class="agent-contact">
+                        <a href="tel:<?php echo esc_attr($listing['agent']['phone']); ?>" class="agent-contact-link">
+                            <svg class="contact-icon" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+                            <?php echo esc_html($listing['agent']['phone']); ?>
+                        </a>
+                        <a href="mailto:<?php echo esc_attr($listing['agent']['email']); ?>" class="agent-contact-link">
+                            <svg class="contact-icon" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
+                            <?php echo esc_html($listing['agent']['email']); ?>
+                        </a>
+                    </div>
+                    <div class="agent-cta-buttons">
+                        <a href="<?php echo esc_url($listing['cta']['scheduleUrl']); ?>" class="btn btn-primary">Schedule Showing</a>
+                        <a href="<?php echo esc_url($listing['cta']['requestReportUrl']); ?>" class="btn btn-secondary">Request Report</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode('property_listing', 'property_listing_shortcode');
+?>`;
+                      navigator.clipboard.writeText(phpCode);
+                      alert('✅ PHP Code copied to clipboard!\n\nPaste this into WordPress:\nAppearance → Theme File Editor → functions.php');
+                    }}
+                    className="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition font-semibold whitespace-nowrap"
+                  >
+                    📋 Copy PHP
+                  </button>
+                </div>
+                <div className="bg-gray-800 text-green-400 p-4 rounded-lg overflow-x-auto text-xs max-h-48">
+                  <pre>&lt;?php{'\n'}function property_listing_shortcode($atts) {'{'}{'\n'}  // Renders beautiful property listing from JSON{'\n'}  // ... (full code will be copied){'\n'}{'}'}{'\n'}add_shortcode('property_listing', 'property_listing_shortcode');{'\n'}?&gt;</pre>
+                </div>
+                <p className="text-xs text-gray-600 mt-2">
+                  ⚠️ Important: Add this ONCE to your functions.php file. Scroll to the bottom of the file and paste.
+                </p>
+              </div>
+
+              {/* Step 2: CSS Styles */}
+              <div className="p-6 bg-pink-50 rounded-lg border-2 border-pink-300">
+                <div className="flex justify-between items-center mb-4">
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-800">
+                      Step 2️⃣: Copy CSS Styles
+                    </h3>
+                    <p className="text-sm text-gray-600 mt-1">
+                      Add this to WordPress → Appearance → Customize → Additional CSS
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => {
+                      const cssCode = `.property-listing-container { max-width: 100%; margin: 0 auto; background: #f9fafb; }
+.property-hero { position: relative; height: 60vh; min-height: 400px; background-size: cover; background-position: center; margin-bottom: 3rem; }
+.property-hero-overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.4); display: flex; align-items: flex-end; }
+.property-hero-content { width: 100%; max-width: 1200px; margin: 0 auto; padding: 3rem 1rem; }
+.property-title { font-size: 2.5rem; font-weight: bold; color: white; margin: 0 0 1rem 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+.property-price { font-size: 1.875rem; font-weight: 600; color: white; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+.property-content-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 1rem 3rem; display: grid; grid-template-columns: 1fr; gap: 2rem; }
+@media (min-width: 1024px) { .property-content-wrapper { grid-template-columns: 2fr 1fr; } }
+.property-card, .property-stats-card { background: white; border-radius: 0.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); padding: 1.5rem; margin-bottom: 2rem; }
+.property-card h2 { font-size: 1.5rem; font-weight: bold; margin: 0 0 1rem 0; color: #1f2937; }
+.property-card h3 { font-size: 1.125rem; font-weight: 600; margin: 1.5rem 0 0.75rem 0; color: #374151; }
+.property-stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-bottom: 1.5rem; }
+@media (min-width: 768px) { .property-stats-grid { grid-template-columns: repeat(4, 1fr); } }
+.property-stat { text-align: center; }
+.stat-label { display: block; font-size: 0.875rem; color: #6b7280; margin-bottom: 0.25rem; }
+.stat-value { display: block; font-size: 1.5rem; font-weight: bold; color: #1f2937; }
+.stat-unit { display: block; font-size: 0.75rem; color: #6b7280; }
+.property-details-footer { padding-top: 1.5rem; border-top: 1px solid #e5e7eb; }
+.property-details-footer p { margin: 0.5rem 0; color: #374151; }
+.property-features-list { display: grid; grid-template-columns: 1fr; gap: 0.75rem; list-style: none; padding: 0; margin: 0; }
+@media (min-width: 768px) { .property-features-list { grid-template-columns: repeat(2, 1fr); } }
+.property-feature { display: flex; align-items: flex-start; gap: 0.5rem; }
+.feature-icon { width: 1.25rem; height: 1.25rem; color: #10b981; flex-shrink: 0; margin-top: 0.125rem; }
+.property-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+@media (min-width: 768px) { .property-gallery { grid-template-columns: repeat(3, 1fr); } }
+.gallery-item { position: relative; height: 12rem; overflow: hidden; border-radius: 0.5rem; }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+.gallery-item:hover img { transform: scale(1.05); }
+.property-poi-list { list-style: none; padding: 0; margin: 0; }
+.property-poi { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0; color: #374151; }
+.poi-icon { width: 1.25rem; height: 1.25rem; color: #3b82f6; flex-shrink: 0; }
+.property-agent-card { background: white; border-radius: 0.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); padding: 1.5rem; position: sticky; top: 1rem; }
+.property-agent-card h2 { font-size: 1.25rem; font-weight: bold; margin: 0 0 1rem 0; color: #1f2937; }
+.agent-info { margin-bottom: 1.5rem; }
+.agent-name { font-size: 1.125rem; font-weight: 600; margin: 0 0 0.25rem 0; color: #1f2937; }
+.agent-title, .agent-company { font-size: 0.875rem; color: #6b7280; margin: 0.125rem 0; }
+.agent-contact { margin-bottom: 1.5rem; }
+.agent-contact-link { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 0; color: #374151; text-decoration: none; transition: color 0.2s; }
+.agent-contact-link:hover { color: #2563eb; }
+.contact-icon { width: 1.25rem; height: 1.25rem; flex-shrink: 0; }
+.agent-cta-buttons { display: flex; flex-direction: column; gap: 0.75rem; }
+.btn { display: block; text-align: center; padding: 0.75rem 1rem; border-radius: 0.5rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+.btn-primary { background: #2563eb; color: white; }
+.btn-primary:hover { background: #1d4ed8; }
+.btn-secondary { background: #e5e7eb; color: #1f2937; }
+.btn-secondary:hover { background: #d1d5db; }`;
+                      navigator.clipboard.writeText(cssCode);
+                      alert('✅ CSS Styles copied to clipboard!\n\nPaste this into WordPress:\nAppearance → Customize → Additional CSS');
+                    }}
+                    className="px-4 py-2 bg-pink-600 text-white rounded hover:bg-pink-700 transition font-semibold whitespace-nowrap"
+                  >
+                    📋 Copy CSS
+                  </button>
+                </div>
+                <div className="bg-gray-800 text-blue-400 p-4 rounded-lg overflow-x-auto text-xs max-h-48">
+                  <pre>.property-listing-container {'{'} max-width: 100%; margin: 0 auto; background: #f9fafb; {'}'}{'\n'}.property-hero {'{'} position: relative; height: 60vh; ...{'}'}{'\n'}/* ... (full CSS will be copied) */</pre>
+                </div>
+                <p className="text-xs text-gray-600 mt-2">
+                  💅 This makes your property listing look beautiful and matches the Next.js design
+                </p>
+              </div>
+
+              {/* Step 3: JSON Data */}
+            <div className="p-6 bg-gray-50 rounded-lg border-2 border-green-200">
+              <div className="flex justify-between items-center mb-4">
+                <div>
+                  <h3 className="text-xl font-bold text-gray-800">
+                    Step 3️⃣: Copy JSON Data
+                  </h3>
+                  <p className="text-sm text-gray-600 mt-1">
+                    Add this to WordPress → Custom Field named "property_listing_json"
+                  </p>
+                </div>
                 <button
                   onClick={() => {
                     navigator.clipboard.writeText(generatedJSON);
@@ -751,16 +1025,19 @@ export default function Page() {
               
               <div className="mb-4 p-4 bg-green-50 border border-green-300 rounded">
                 <p className="text-sm font-semibold text-green-800 mb-2">
-                  ✅ Instructions for WordPress:
+                  ✅ How to Add to WordPress Page:
                 </p>
                 <ol className="text-sm text-gray-700 space-y-1 list-decimal list-inside">
-                  <li>Copy the JSON below</li>
-                  <li>Go to your WordPress admin panel</li>
-                  <li>Paste into your custom field, ACF field, or Gutenberg block</li>
-                  <li>Save and publish!</li>
+                  <li>Create a new page in WordPress</li>
+                  <li>Scroll to <strong>Custom Fields</strong> section (enable it if hidden)</li>
+                  <li>Click <strong>Add New Custom Field</strong></li>
+                  <li>Name: <code className="bg-gray-200 px-1 rounded">property_listing_json</code></li>
+                  <li>Value: Paste the JSON data below</li>
+                  <li>In the page editor, add this shortcode: <code className="bg-gray-200 px-1 rounded">[property_listing]</code></li>
+                  <li>Click <strong>Publish</strong> and view your beautiful listing! 🎉</li>
                 </ol>
                 <p className="text-xs text-gray-500 mt-2">
-                  💡 Tip: This JSON includes all SEO/GEO data and is ready to use with WordPress plugins like ACF Pro, Elementor, or custom themes.
+                  💡 Make sure you've completed Steps 1 & 2 (PHP and CSS) first!
                 </p>
               </div>
 
