@@ -68,6 +68,8 @@ export default function BrendaListingsPage() {
   const [generatedJSON, setGeneratedJSON] = useState('');
   const [slug, setSlug] = useState('');
   const [outputFormat, setOutputFormat] = useState<'nextjs' | 'wordpress'>('nextjs');
+  const [recipientEmail, setRecipientEmail] = useState('');
+  const [emailSending, setEmailSending] = useState(false);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({
@@ -245,6 +247,240 @@ export default function Page() {
 `;
 
     setGeneratedCode(code);
+
+    // Send email if WordPress output and email provided
+    if (outputFormat === 'wordpress' && recipientEmail) {
+      handleSendEmail(generatedSlug, wordpressJSON);
+    }
+  };
+
+  const handleSendEmail = async (listingSlug: string, jsonData: any) => {
+    setEmailSending(true);
+    
+    try {
+      // Generate PHP code
+      const phpCode = `<?php
+/**
+ * Property Listing Shortcode for WordPress
+ * Add this code to Code Snippets plugin (remove <?php and ?> tags)
+ */
+
+function property_listing_shortcode($atts) {
+    $atts = shortcode_atts(array(
+        'field' => 'property_listing_json',
+    ), $atts);
+    
+    $json_data = get_post_meta(get_the_ID(), $atts['field'], true);
+    
+    if (empty($json_data)) {
+        return '<p style="color:red;">No property listing data found. Add JSON to custom field: property_listing_json</p>';
+    }
+    
+    $listing = json_decode($json_data, true);
+    if (!$listing) {
+        return '<p style="color:red;">Error parsing JSON data.</p>';
+    }
+    
+    $price = '$' . number_format($listing['price']);
+    
+    ob_start();
+    ?>
+    <div class="property-listing-container">
+        <div class="property-hero" style="background-image: url('<?php echo esc_url($listing['heroPhoto']['url']); ?>');">
+            <div class="property-hero-overlay">
+                <div class="property-hero-content">
+                    <h1 class="property-title"><?php echo esc_html($listing['title']); ?></h1>
+                    <p class="property-price"><?php echo esc_html($price); ?></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="property-content-wrapper">
+            <div class="property-main-content">
+                <div class="property-stats-card">
+                    <div class="property-stats-grid">
+                        <div class="property-stat">
+                            <span class="stat-label">Beds</span>
+                            <span class="stat-value"><?php echo esc_html($listing['beds']); ?></span>
+                        </div>
+                        <div class="property-stat">
+                            <span class="stat-label">Baths</span>
+                            <span class="stat-value"><?php echo esc_html($listing['baths']); ?></span>
+                        </div>
+                        <div class="property-stat">
+                            <span class="stat-label">Living Area</span>
+                            <span class="stat-value"><?php echo esc_html(number_format($listing['livingAreaSqFt'])); ?></span>
+                            <span class="stat-unit">sq ft</span>
+                        </div>
+                        <div class="property-stat">
+                            <span class="stat-label">Lot Size</span>
+                            <span class="stat-value"><?php echo esc_html(number_format($listing['lotSizeSqFt'])); ?></span>
+                            <span class="stat-unit">sq ft</span>
+                        </div>
+                    </div>
+                    <div class="property-details-footer">
+                        <p><strong>Built:</strong> <?php echo esc_html($listing['yearBuilt']); ?> • <strong>Type:</strong> <?php echo esc_html($listing['propertyType']); ?></p>
+                        <p><strong>Address:</strong> <?php echo esc_html($listing['address']['streetAddress']); ?>, <?php echo esc_html($listing['address']['addressLocality']); ?>, <?php echo esc_html($listing['address']['addressRegion']); ?> <?php echo esc_html($listing['address']['postalCode']); ?></p>
+                    </div>
+                </div>
+                
+                <div class="property-card">
+                    <h2>About This Property</h2>
+                    <p><?php echo esc_html($listing['storyIntro']); ?></p>
+                </div>
+                
+                <div class="property-card">
+                    <h2>Key Features</h2>
+                    <ul class="property-features-list">
+                        <?php foreach ($listing['features'] as $feature): ?>
+                            <li class="property-feature">
+                                <svg class="feature-icon" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span><?php echo esc_html($feature); ?></span>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+                
+                <?php if (!empty($listing['gallery'])): ?>
+                <div class="property-card">
+                    <h2>Photo Gallery</h2>
+                    <div class="property-gallery">
+                        <?php foreach ($listing['gallery'] as $photo): ?>
+                            <div class="gallery-item">
+                                <img src="<?php echo esc_url($photo['url']); ?>" alt="<?php echo esc_attr($photo['alt']); ?>">
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <?php endif; ?>
+                
+                <div class="property-card">
+                    <h2>About <?php echo esc_html($listing['neighborhoodName']); ?></h2>
+                    <h3>Points of Interest</h3>
+                    <ul class="property-poi-list">
+                        <?php foreach ($listing['pointsOfInterest'] as $poi): ?>
+                            <li class="property-poi">
+                                <svg class="poi-icon" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span><?php echo esc_html($poi['name']); ?> - <?php echo esc_html($poi['minutesAway']); ?> min</span>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="property-sidebar">
+                <div class="property-agent-card">
+                    <h2>Contact Agent</h2>
+                    <div class="agent-info">
+                        <p class="agent-name"><?php echo esc_html($listing['agent']['name']); ?></p>
+                        <p class="agent-title"><?php echo esc_html($listing['agent']['jobTitle']); ?></p>
+                        <p class="agent-company"><?php echo esc_html($listing['agent']['brokerage']['name']); ?></p>
+                    </div>
+                    <div class="agent-contact">
+                        <a href="tel:<?php echo esc_attr($listing['agent']['phone']); ?>" class="agent-contact-link">
+                            <svg class="contact-icon" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+                            <?php echo esc_html($listing['agent']['phone']); ?>
+                        </a>
+                        <a href="mailto:<?php echo esc_attr($listing['agent']['email']); ?>" class="agent-contact-link">
+                            <svg class="contact-icon" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
+                            <?php echo esc_html($listing['agent']['email']); ?>
+                        </a>
+                    </div>
+                    <div class="agent-cta-buttons">
+                        <a href="<?php echo esc_url($listing['cta']['scheduleUrl']); ?>" class="btn btn-primary">Schedule Showing</a>
+                        <a href="<?php echo esc_url($listing['cta']['requestReportUrl']); ?>" class="btn btn-secondary">Request Report</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode('property_listing', 'property_listing_shortcode');
+?>`;
+
+      // Generate CSS code
+      const cssCode = `.property-listing-container { max-width: 100%; margin: 0 auto; background: #f9fafb; }
+.property-hero { position: relative; height: 60vh; min-height: 400px; background-size: cover; background-position: center; margin-bottom: 3rem; }
+.property-hero-overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.4); display: flex; align-items: flex-end; }
+.property-hero-content { width: 100%; max-width: 1200px; margin: 0 auto; padding: 3rem 1rem; }
+.property-title { font-size: 2.5rem; font-weight: bold; color: white; margin: 0 0 1rem 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+.property-price { font-size: 1.875rem; font-weight: 600; color: white; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+.property-content-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 1rem 3rem; display: grid; grid-template-columns: 1fr; gap: 2rem; }
+@media (min-width: 1024px) { .property-content-wrapper { grid-template-columns: 2fr 1fr; } }
+.property-card, .property-stats-card { background: white; border-radius: 0.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); padding: 1.5rem; margin-bottom: 2rem; }
+.property-card h2 { font-size: 1.5rem; font-weight: bold; margin: 0 0 1rem 0; color: #1f2937; }
+.property-card h3 { font-size: 1.125rem; font-weight: 600; margin: 1.5rem 0 0.75rem 0; color: #374151; }
+.property-stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-bottom: 1.5rem; }
+@media (min-width: 768px) { .property-stats-grid { grid-template-columns: repeat(4, 1fr); } }
+.property-stat { text-align: center; }
+.stat-label { display: block; font-size: 0.875rem; color: #6b7280; margin-bottom: 0.25rem; }
+.stat-value { display: block; font-size: 1.5rem; font-weight: bold; color: #1f2937; }
+.stat-unit { display: block; font-size: 0.75rem; color: #6b7280; }
+.property-details-footer { padding-top: 1.5rem; border-top: 1px solid #e5e7eb; }
+.property-details-footer p { margin: 0.5rem 0; color: #374151; }
+.property-features-list { display: grid; grid-template-columns: 1fr; gap: 0.75rem; list-style: none; padding: 0; margin: 0; }
+@media (min-width: 768px) { .property-features-list { grid-template-columns: repeat(2, 1fr); } }
+.property-feature { display: flex; align-items: flex-start; gap: 0.5rem; }
+.feature-icon { width: 1.25rem; height: 1.25rem; color: #10b981; flex-shrink: 0; margin-top: 0.125rem; }
+.property-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+@media (min-width: 768px) { .property-gallery { grid-template-columns: repeat(3, 1fr); } }
+.gallery-item { position: relative; height: 12rem; overflow: hidden; border-radius: 0.5rem; }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+.gallery-item:hover img { transform: scale(1.05); }
+.property-poi-list { list-style: none; padding: 0; margin: 0; }
+.property-poi { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0; color: #374151; }
+.poi-icon { width: 1.25rem; height: 1.25rem; color: #3b82f6; flex-shrink: 0; }
+.property-agent-card { background: white; border-radius: 0.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); padding: 1.5rem; position: sticky; top: 1rem; }
+.property-agent-card h2 { font-size: 1.25rem; font-weight: bold; margin: 0 0 1rem 0; color: #1f2937; }
+.agent-info { margin-bottom: 1.5rem; }
+.agent-name { font-size: 1.125rem; font-weight: 600; margin: 0 0 0.25rem 0; color: #1f2937; }
+.agent-title, .agent-company { font-size: 0.875rem; color: #6b7280; margin: 0.125rem 0; }
+.agent-contact { margin-bottom: 1.5rem; }
+.agent-contact-link { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 0; color: #374151; text-decoration: none; transition: color 0.2s; }
+.agent-contact-link:hover { color: #2563eb; }
+.contact-icon { width: 1.25rem; height: 1.25rem; flex-shrink: 0; }
+.agent-cta-buttons { display: flex; flex-direction: column; gap: 0.75rem; }
+.btn { display: block; text-align: center; padding: 0.75rem 1rem; border-radius: 0.5rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+.btn-primary { background: #2563eb; color: white; }
+.btn-primary:hover { background: #1d4ed8; }
+.btn-secondary { background: #e5e7eb; color: #1f2937; }
+.btn-secondary:hover { background: #d1d5db; }`;
+
+      // Send email
+      const response = await fetch('/api/send-listing-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          recipientEmail,
+          propertyTitle: formData.title,
+          slug: listingSlug,
+          phpCode,
+          cssCode,
+          jsonData: JSON.stringify(jsonData, null, 2)
+        })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert(`✅ Email sent successfully to ${recipientEmail}!\n\nCheck your inbox for all 3 WordPress files (PHP, CSS, JSON).`);
+      } else {
+        alert(`⚠️ Failed to send email: ${data.error}\n\nYou can still copy the code manually from the sections below.`);
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      alert('⚠️ Failed to send email. You can still copy the code manually from the sections below.');
+    } finally {
+      setEmailSending(false);
+    }
   };
 
   const handleSaveFile = async () => {
@@ -634,6 +870,26 @@ export default function Page() {
               </div>
             </div>
 
+            {/* Email Notification */}
+            <div className="bg-green-50 border-2 border-green-200 rounded-lg p-6">
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                📧 Email Notification (Optional - for WordPress output)
+              </label>
+              <p className="text-sm text-gray-600 mb-3">
+                Enter your email to receive all WordPress files (PHP, CSS, JSON) when generated
+              </p>
+              <input
+                type="email"
+                value={recipientEmail}
+                onChange={(e) => setRecipientEmail(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                placeholder="your-email@example.com"
+              />
+              <p className="text-xs text-gray-500 mt-2">
+                💡 Great for letting someone else create listings and sending you the code automatically!
+              </p>
+            </div>
+
             {/* Output Format Selection */}
             <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-6">
               <label className="block text-sm font-semibold text-gray-700 mb-3">
@@ -675,10 +931,24 @@ export default function Page() {
               <button
                 type="button"
                 onClick={handleGenerateCode}
-                className="w-full bg-blue-600 text-white py-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition shadow-lg"
+                disabled={emailSending}
+                className={`w-full py-4 rounded-lg font-semibold text-lg transition shadow-lg ${
+                  emailSending 
+                    ? 'bg-gray-400 cursor-not-allowed' 
+                    : 'bg-blue-600 text-white hover:bg-blue-700'
+                }`}
               >
-                {outputFormat === 'nextjs' ? '🚀 Generate Next.js Code' : '🔌 Generate WordPress JSON'}
+                {emailSending 
+                  ? '📧 Sending Email...' 
+                  : outputFormat === 'nextjs' 
+                    ? '🚀 Generate Next.js Code' 
+                    : '🔌 Generate WordPress JSON'}
               </button>
+              {recipientEmail && outputFormat === 'wordpress' && !emailSending && (
+                <p className="text-sm text-green-600 mt-2 text-center">
+                  ✅ Code will be emailed to {recipientEmail}
+                </p>
+              )}
             </div>
           </form>
 
