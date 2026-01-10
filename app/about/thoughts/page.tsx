@@ -14,10 +14,12 @@ export default function ThoughtsPage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="hero-gradient-blue py-20">
+      <section className="bg-gray-700 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="heading-xl text-white mb-6">Our Thoughts</h1>
-          <p className="text-xl text-indigo-100 max-w-3xl mx-auto">
+          <h1 className="text-5xl lg:text-6xl font-bold mb-6" style={{fontFamily: 'Georgia, serif', fontStyle: 'italic'}}>
+            Our Thoughts
+          </h1>
+          <p className="text-xl text-white/90 max-w-3xl mx-auto">
             Insights and reflections on guiding the Rising Generation
           </p>
         </div>

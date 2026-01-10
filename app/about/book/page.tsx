@@ -38,22 +38,24 @@ export default function BookPage() {
       <JsonLd data={bookSchema} />
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-indigo-900 to-blue-900 text-white py-20 lg:py-32">
+      <section className="relative bg-[#3C5F5E] text-white py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-5xl lg:text-6xl font-bold mb-6">The Quest for Legitimacy</h1>
-              <h2 className="text-2xl lg:text-3xl text-blue-200 mb-8">
+              <h2 className="text-2xl lg:text-3xl text-white/90 mb-8">
                 How Children of Prominent Families Discover Their Unique Place in the World
               </h2>
-              <p className="text-xl text-blue-100 mb-4">By Dr. Jamie Weiner</p>
-              <p className="text-lg text-blue-100 mb-8">Published by Wiley, 2022</p>
-              <Link
-                href="/contact"
-                className="inline-block px-8 py-4 bg-white text-blue-900 text-lg font-semibold rounded-md hover:bg-gray-100 transition-colors"
+              <p className="text-xl text-white/90 mb-4">By Dr. Jamie Weiner</p>
+              <p className="text-lg text-white/90 mb-8">Published by Wiley, 2022</p>
+              <a
+                href="https://www.amazon.co.uk/Quest-Legitimacy-Children-Prominen-Families/dp/1119868270"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-orange inline-block"
               >
                 Order the Book
-              </Link>
+              </a>
             </div>
             <div className="flex justify-center">
               <div className="w-80 h-[480px] rounded-xl shadow-2xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
@@ -119,23 +121,23 @@ export default function BookPage() {
       </section>
 
       {/* Download CTA */}
-      <section className="py-16 lg:py-24 bg-blue-600 text-white">
+      <section className="py-16 lg:py-24 bg-[#E37E33] text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-bold mb-6">Download a Free Chapter</h2>
-          <p className="text-xl text-blue-100 mb-8">
+          <p className="text-xl mb-8">
             Take the first steps on Your Quest
           </p>
-          <p className="text-lg text-blue-100 mb-8">
+          <p className="text-lg mb-8">
             Download a <strong>free</strong> chapter of The Quest for Legitimacy - How Children of Prominent 
             Families Discover Their Unique Place in the World!
           </p>
           <Link
             href="/contact"
-            className="inline-block px-8 py-4 bg-white text-blue-600 font-semibold rounded-md hover:bg-gray-100 transition-colors"
+            className="inline-block px-8 py-4 bg-white text-[#E37E33] font-semibold rounded-md hover:bg-gray-100 transition-colors"
           >
             Download the Chapter
           </Link>
-          <p className="mt-6 text-sm text-blue-200">
+          <p className="mt-6 text-sm text-white/90">
             We won&apos;t send you spam. Unsubscribe at any time.
           </p>
         </div>
