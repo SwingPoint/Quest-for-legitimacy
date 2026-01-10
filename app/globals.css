@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:wght@300;400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-white text-gray-900;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+}
+
+@layer components {
+  /* Hero Gradients matching original site */
+  .hero-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+
+  .hero-gradient-blue {
+    background: linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #8b5cf6 100%);
+  }
+
+  /* Image Placeholder Styles */
+  .image-placeholder {
+    @apply bg-gray-200 flex items-center justify-center text-gray-400 relative overflow-hidden;
+    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  }
+
+  .image-placeholder::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-300 opacity-50;
+  }
+
+  .team-photo-placeholder {
+    @apply image-placeholder rounded-full;
+    aspect-ratio: 1;
+  }
+
+  /* Button Styles matching original */
+  .btn-primary {
+    @apply px-8 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-all duration-200 shadow-md hover:shadow-lg;
+  }
+  
+  .btn-secondary {
+    @apply px-8 py-3 bg-white text-indigo-600 font-semibold rounded-lg hover:bg-gray-50 transition-all duration-200 border-2 border-indigo-600;
+  }
+
+  .btn-outline {
+    @apply px-8 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-indigo-600 transition-all duration-200;
+  }
+
+  /* Card Styles */
+  .card {
+    @apply bg-white rounded-xl shadow-lg p-8 transition-transform duration-200 hover:scale-105;
+  }
+
+  /* Section Styles */
+  .section-light {
+    @apply bg-white py-16 lg:py-24;
+  }
+
+  .section-gray {
+    @apply bg-gray-50 py-16 lg:py-24;
+  }
+
+  .section-dark {
+    @apply bg-gray-900 text-white py-16 lg:py-24;
+  }
+
+  /* Typography */
+  .heading-xl {
+    @apply text-5xl lg:text-6xl font-bold tracking-tight;
+  }
+
+  .heading-lg {
+    @apply text-4xl lg:text-5xl font-bold tracking-tight;
+  }
+
+  .heading-md {
+    @apply text-3xl lg:text-4xl font-bold tracking-tight;
+  }
+
+  .text-lead {
+    @apply text-xl lg:text-2xl text-gray-600 leading-relaxed;
+  }
+}
+
