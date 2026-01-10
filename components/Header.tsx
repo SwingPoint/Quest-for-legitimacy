@@ -36,8 +36,11 @@ export default function Header() {
                 <Link href="/about/team" className="block px-6 py-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors first:rounded-t-lg">
                   The Team
                 </Link>
-                <Link href="/about/book" className="block px-6 py-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors last:rounded-b-lg">
+                <Link href="/about/book" className="block px-6 py-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
                   The Book
+                </Link>
+                <Link href="/about/thoughts" className="block px-6 py-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors last:rounded-b-lg">
+                  Our Thoughts
                 </Link>
               </div>
             </div>
@@ -82,7 +85,7 @@ export default function Header() {
             <Link href="/about/book" className="block py-3 text-gray-700 hover:text-indigo-600 hover:bg-gray-50 rounded-lg px-4 pl-8 transition-colors">
               The Book
             </Link>
-            <Link href="/about/team" className="block py-3 text-gray-700 hover:text-indigo-600 hover:bg-gray-50 rounded-lg px-4 pl-8 transition-colors">
+            <Link href="/about/thoughts" className="block py-3 text-gray-700 hover:text-indigo-600 hover:bg-gray-50 rounded-lg px-4 pl-8 transition-colors">
               Our Thoughts
             </Link>
             <Link href="/events" className="block py-3 text-gray-700 hover:text-indigo-600 hover:bg-gray-50 rounded-lg px-4 transition-colors">

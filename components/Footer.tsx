@@ -8,68 +8,65 @@ export default function Footer() {
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Column 1 - Brand */}
+          {/* Column 1 - Quick Links */}
           <div>
-            <h3 className="text-lg font-bold mb-4">The Quest for Legitimacy</h3>
-            <p className="text-gray-400 text-sm">
-              Guiding the Rising Generation of Prominent Families
-            </p>
-          </div>
-
-          {/* Column 2 - Quick Links */}
-          <div>
-            <h4 className="font-semibold mb-4">Quick Links</h4>
+            <h4 className="font-semibold mb-4 text-lg">Quick Links</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/" className="text-gray-400 hover:text-white">
+                <Link href="/" className="text-gray-300 hover:text-white transition-colors">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/about/book" className="text-gray-400 hover:text-white">
+                <Link href="/about/book" className="text-gray-300 hover:text-white transition-colors">
                   The Book
                 </Link>
               </li>
               <li>
-                <Link href="/events" className="text-gray-400 hover:text-white">
+                <Link href="/events" className="text-gray-300 hover:text-white transition-colors">
                   Events
                 </Link>
               </li>
               <li>
-                <Link href="/rise-experience" className="text-gray-400 hover:text-white">
+                <Link href="/rise-experience" className="text-gray-300 hover:text-white transition-colors">
                   The Rise Programme
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Column 3 - About */}
+          {/* Column 2 - About */}
           <div>
-            <h4 className="font-semibold mb-4">About</h4>
+            <h4 className="font-semibold mb-4 text-lg">About</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/about/team" className="text-gray-400 hover:text-white">
+                <Link href="/about/team" className="text-gray-300 hover:text-white transition-colors">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-400 hover:text-white">
+                <Link href="/about/thoughts" className="text-gray-300 hover:text-white transition-colors">
+                  Blog
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-gray-300 hover:text-white transition-colors">
                   Contact Us
                 </Link>
               </li>
               <li>
-                <Link href="/about/team" className="text-gray-400 hover:text-white">
+                <Link href="/about/team" className="text-gray-300 hover:text-white transition-colors">
                   The Team
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Column 4 - Contact */}
+          {/* Column 3 - Contact */}
           <div>
-            <h4 className="font-semibold mb-4">Get In Touch</h4>
-            <p className="text-gray-400 text-sm mb-4">
-              <a href={`mailto:${siteData.email}`} className="hover:text-white">
+            <h4 className="font-semibold mb-4 text-lg">Get In Touch</h4>
+            <p className="text-gray-300 text-sm mb-4">
+              <a href={`mailto:${siteData.email}`} className="hover:text-white transition-colors">
                 {siteData.email}
               </a>
             </p>
@@ -78,7 +75,7 @@ export default function Footer() {
                 href={siteData.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white"
+                className="text-gray-300 hover:text-white transition-colors"
                 aria-label="Instagram"
               >
                 <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -89,7 +86,7 @@ export default function Footer() {
                 href={siteData.social.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white"
+                className="text-gray-300 hover:text-white transition-colors"
                 aria-label="LinkedIn"
               >
                 <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -98,21 +95,33 @@ export default function Footer() {
               </a>
             </div>
           </div>
+
+          {/* Column 4 - Brand */}
+          <div>
+            <h3 className="text-lg font-bold mb-4">The Quest for Legitimacy</h3>
+            <p className="text-gray-300 text-sm">
+              Guiding the Rising Generation of Prominent Families
+            </p>
+          </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 pt-8 border-t border-gray-800 text-center text-sm text-gray-400">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p>© Copyright {currentYear} Quest for Legitimacy. All Rights Reserved.</p>
-            <div className="flex space-x-6">
-              <Link href="/privacy" className="hover:text-white">
+        <div className="mt-12 pt-8 border-t border-gray-800">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-center md:text-left">
+            <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-6 text-sm text-gray-400">
+              <p>© Copyright {currentYear} Quest for Legitimacy</p>
+              <p className="hidden md:block">•</p>
+              <p>All Rights Reserved</p>
+            </div>
+            <div className="flex flex-wrap justify-center md:justify-end space-x-6 text-sm">
+              <Link href="/cookies" className="text-gray-400 hover:text-white transition-colors">
+                Cookies
+              </Link>
+              <Link href="/privacy" className="text-gray-400 hover:text-white transition-colors">
                 Privacy
               </Link>
-              <Link href="/terms" className="hover:text-white">
+              <Link href="/terms" className="text-gray-400 hover:text-white transition-colors">
                 Terms
-              </Link>
-              <Link href="/cookies" className="hover:text-white">
-                Cookies
               </Link>
             </div>
           </div>
