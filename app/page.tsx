@@ -31,26 +31,27 @@ export default function HomePage() {
       <JsonLd data={organizationSchema} />
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-50 to-indigo-100 py-20 lg:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative hero-gradient-blue py-24 lg:py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/images/hero-pattern.svg')] opacity-10"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+            <h1 className="heading-xl text-white mb-8 leading-tight">
               Take Ownership of<br />Your Life
             </h1>
-            <p className="text-xl lg:text-2xl text-gray-700 mb-4 max-w-3xl mx-auto">
+            <p className="text-xl lg:text-2xl text-indigo-100 mb-4 max-w-3xl mx-auto font-light">
               Growing up in the shadow of a giant can leave you wondering
             </p>
-            <p className="text-2xl lg:text-3xl font-semibold text-gray-800 mb-8">
+            <p className="text-3xl lg:text-4xl font-bold text-white mb-8 italic">
               &quot;How will I measure up?&quot;
             </p>
-            <p className="text-lg text-gray-700 mb-12 max-w-4xl mx-auto">
+            <p className="text-lg lg:text-xl text-indigo-50 mb-12 max-w-4xl mx-auto leading-relaxed">
               The Quest for Legitimacy provides you with a framework, guidance, and the support of a community 
               of like-minded people to help you understand the impact you can have on the world and the agency 
               for you to take action!
             </p>
             <Link
               href="/rise-experience"
-              className="inline-block px-8 py-4 bg-blue-600 text-white text-lg font-semibold rounded-md hover:bg-blue-700 transition-colors"
+              className="btn-outline inline-block"
             >
               The RISE Experience
             </Link>
@@ -59,31 +60,31 @@ export default function HomePage() {
       </section>
 
       {/* Introduction Section */}
-      <section className="py-16 lg:py-24 bg-white">
+      <section className="section-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">
+            <h2 className="heading-lg text-gray-900 mb-6">
               Guiding the Rising Generation of Prominent Families
             </h2>
             <p className="text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
-              The Quest for Legitimacy is <strong>a personal development program</strong> that will help you 
+              The Quest for Legitimacy is <strong className="text-indigo-600">a personal development program</strong> that will help you 
               to navigate the unique struggle of growing up in a prominent family.
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto text-lg text-gray-700 space-y-6">
+          <div className="max-w-4xl mx-auto text-lg text-gray-700 space-y-6 leading-relaxed">
             <p>
               This prominence may be in the form of a significant family member, a business, wealth, or reputation, 
               but can create a unique pressure to live up to the accomplishments of your predecessors.
             </p>
             <p>
               You might feel isolated, but you are not alone. Join others just like you and become a part of a 
-              global community of next generation leaders eager to discover their own legitimacy: <strong>The Rising Generation</strong>.
+              global community of next generation leaders eager to discover their own legitimacy: <strong className="text-indigo-600">The Rising Generation</strong>.
             </p>
             <div className="text-center pt-8">
               <Link
                 href="/rise-experience"
-                className="inline-block px-8 py-3 bg-gray-900 text-white font-semibold rounded-md hover:bg-gray-800 transition-colors"
+                className="btn-primary"
               >
                 Are you ready to start your Quest?
               </Link>
@@ -118,27 +119,32 @@ export default function HomePage() {
       </section>
 
       {/* Team Section */}
-      <section className="py-16 lg:py-24 bg-white">
+      <section className="section-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">Our Team</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <h2 className="heading-lg text-gray-900 mb-16 text-center">Our Team</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
             {teamData.map((member) => (
-              <article key={member.name} className="text-center">
+              <article key={member.name} className="text-center group">
                 <div className="mb-6">
-                  <div className="w-48 h-48 mx-auto bg-gray-200 rounded-full flex items-center justify-center">
-                    <span className="text-gray-500 text-sm">Photo</span>
+                  <div className="w-56 h-56 mx-auto team-photo-placeholder relative">
+                    <div className="absolute inset-0 flex flex-col items-center justify-center p-6">
+                      <svg className="w-20 h-20 text-gray-300 mb-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                      </svg>
+                      <span className="text-xs text-gray-400 text-center">Add {member.name.split(' ')[0]}&apos;s photo here</span>
+                    </div>
                   </div>
                 </div>
-                <h5 className="text-sm font-semibold text-gray-500 uppercase mb-2">{member.role}</h5>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">{member.name}</h3>
-                <p className="text-gray-700 leading-relaxed">{member.bio}</p>
+                <h5 className="text-sm font-semibold text-indigo-600 uppercase mb-2 tracking-wide">{member.role}</h5>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-indigo-600 transition-colors">{member.name}</h3>
+                <p className="text-gray-600 leading-relaxed">{member.bio}</p>
               </article>
             ))}
           </div>
-          <div className="text-center mt-12">
+          <div className="text-center mt-16">
             <Link
               href="/about/team"
-              className="inline-block px-8 py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition-colors"
+              className="btn-primary"
             >
               Learn More About Our Team
             </Link>
@@ -147,19 +153,19 @@ export default function HomePage() {
       </section>
 
       {/* Book Section */}
-      <section className="py-16 lg:py-24 bg-gradient-to-br from-indigo-900 to-blue-900 text-white">
+      <section className="section-dark hero-gradient">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div>
-              <h2 className="text-4xl font-bold mb-6">The Quest for Legitimacy</h2>
-              <h3 className="text-2xl mb-6 text-blue-200">
+              <h2 className="heading-lg mb-6">The Quest for Legitimacy</h2>
+              <h3 className="text-2xl lg:text-3xl mb-6 text-indigo-100 font-light">
                 How Children of Prominent Families Discover Their Unique Place in the World
               </h3>
-              <p className="text-lg mb-6 text-blue-100 leading-relaxed">
+              <p className="text-lg mb-6 text-indigo-50 leading-relaxed">
                 Jamie brilliantly shares the findings from his research through the use of storytelling in his book, 
                 published by Wiley Publishing.
               </p>
-              <p className="text-lg mb-8 text-blue-100 leading-relaxed">
+              <p className="text-lg mb-10 text-indigo-50 leading-relaxed">
                 The book offers readers the opportunity to understand the lived experience of those growing up in 
                 prominent families and creates a language that is easy to grasp, allowing more meaningful conversations 
                 to be held within families.
@@ -167,21 +173,26 @@ export default function HomePage() {
               <div className="flex flex-wrap gap-4">
                 <Link
                   href="/about/book"
-                  className="inline-block px-8 py-3 bg-white text-blue-900 font-semibold rounded-md hover:bg-gray-100 transition-colors"
+                  className="btn-outline"
                 >
                   Order the Book
                 </Link>
                 <Link
                   href="/about/book"
-                  className="inline-block px-8 py-3 border-2 border-white text-white font-semibold rounded-md hover:bg-white hover:text-blue-900 transition-colors"
+                  className="px-8 py-3 bg-white/10 text-white font-semibold rounded-lg hover:bg-white/20 transition-all duration-200 backdrop-blur-sm"
                 >
                   Learn More
                 </Link>
               </div>
             </div>
             <div className="flex justify-center">
-              <div className="w-64 h-96 bg-blue-800 rounded-lg flex items-center justify-center shadow-2xl">
-                <span className="text-blue-300">Book Cover</span>
+              <div className="w-72 h-[432px] image-placeholder rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-300">
+                <div className="relative w-full h-full flex flex-col items-center justify-center p-8">
+                  <svg className="w-24 h-24 text-gray-300 mb-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
+                  </svg>
+                  <span className="text-sm text-gray-400 text-center">Add book cover image here<br/>(3:4 ratio)</span>
+                </div>
               </div>
             </div>
           </div>
@@ -189,22 +200,22 @@ export default function HomePage() {
       </section>
 
       {/* RISE Experience CTA */}
-      <section className="py-16 lg:py-24 bg-gray-50">
+      <section className="section-gray">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold text-gray-900 mb-6">The RISE Experience</h2>
+          <h2 className="heading-lg text-gray-900 mb-6">The RISE Experience</h2>
           <p className="text-xl text-gray-700 mb-8 leading-relaxed">
             The team offers an in depth personal development program that will help you navigate your personal Quest.
           </p>
-          <p className="text-lg text-gray-700 mb-8">
+          <p className="text-lg text-gray-600 mb-8 leading-relaxed">
             We will guide you through the action steps needed to uncover your true path and understand the impact 
             you can have in the world.
           </p>
-          <p className="text-lg text-gray-700 mb-12">
+          <p className="text-lg text-gray-600 mb-12 leading-relaxed">
             We are also available to deliver workshops, &apos;Meet the Author&apos; dinners, keynotes and adviser training.
           </p>
           <Link
             href="/rise-experience"
-            className="inline-block px-8 py-4 bg-blue-600 text-white text-lg font-semibold rounded-md hover:bg-blue-700 transition-colors"
+            className="btn-primary"
           >
             Learn More About RISE
           </Link>
