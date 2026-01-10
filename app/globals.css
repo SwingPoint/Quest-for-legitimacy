@@ -28,47 +28,17 @@
 }
 
 @layer components {
-  /* Hero Gradients matching original site */
-  .hero-gradient {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  }
-
-  .hero-gradient-blue {
-    background: linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #8b5cf6 100%);
-  }
-
-  /* Image Placeholder Styles */
-  .image-placeholder {
-    @apply bg-gray-200 flex items-center justify-center text-gray-400 relative overflow-hidden;
-    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
-  }
-
-  .image-placeholder::before {
-    content: '';
-    @apply absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-300 opacity-50;
-  }
-
-  .team-photo-placeholder {
-    @apply image-placeholder rounded-full;
-    aspect-ratio: 1;
-  }
-
-  /* Button Styles matching original */
-  .btn-primary {
-    @apply px-8 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-all duration-200 shadow-md hover:shadow-lg;
+  /* Button Styles matching original site */
+  .btn-orange {
+    @apply px-6 py-3 bg-[#E37E33] text-white font-semibold rounded-md hover:bg-[#c2671e] transition-all duration-200 shadow-md hover:shadow-lg;
   }
   
-  .btn-secondary {
-    @apply px-8 py-3 bg-white text-indigo-600 font-semibold rounded-lg hover:bg-gray-50 transition-all duration-200 border-2 border-indigo-600;
+  .btn-teal {
+    @apply px-6 py-3 bg-[#3C5F5E] text-white font-semibold rounded-md hover:bg-[#2d4746] transition-all duration-200 shadow-md hover:shadow-lg;
   }
 
-  .btn-outline {
-    @apply px-8 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-indigo-600 transition-all duration-200;
-  }
-
-  /* Card Styles */
-  .card {
-    @apply bg-white rounded-xl shadow-lg p-8 transition-transform duration-200 hover:scale-105;
+  .btn-outline-white {
+    @apply px-6 py-3 border-2 border-white text-white font-semibold rounded-md hover:bg-white hover:text-gray-900 transition-all duration-200;
   }
 
   /* Section Styles */
@@ -80,8 +50,12 @@
     @apply bg-gray-50 py-16 lg:py-24;
   }
 
-  .section-dark {
-    @apply bg-gray-900 text-white py-16 lg:py-24;
+  .section-teal {
+    @apply bg-[#3C5F5E] text-white py-16 lg:py-24;
+  }
+
+  .section-orange {
+    @apply bg-[#E37E33] text-white py-16 lg:py-24;
   }
 
   /* Typography */

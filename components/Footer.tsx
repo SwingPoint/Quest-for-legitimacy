@@ -5,12 +5,12 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-gray-800 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Column 1 - Quick Links */}
           <div>
-            <h4 className="font-semibold mb-4 text-lg">Quick Links</h4>
+            <h4 className="font-semibold mb-4 text-base">Quick Links</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/" className="text-gray-300 hover:text-white transition-colors">
@@ -37,7 +37,7 @@ export default function Footer() {
 
           {/* Column 2 - About */}
           <div>
-            <h4 className="font-semibold mb-4 text-lg">About</h4>
+            <h4 className="font-semibold mb-4 text-base">About</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/about/team" className="text-gray-300 hover:text-white transition-colors">
@@ -64,7 +64,7 @@ export default function Footer() {
 
           {/* Column 3 - Contact */}
           <div>
-            <h4 className="font-semibold mb-4 text-lg">Get In Touch</h4>
+            <h4 className="font-semibold mb-4 text-base">Get In Touch</h4>
             <p className="text-gray-300 text-sm mb-4">
               <a href={`mailto:${siteData.email}`} className="hover:text-white transition-colors">
                 {siteData.email}
@@ -98,7 +98,7 @@ export default function Footer() {
 
           {/* Column 4 - Brand */}
           <div>
-            <h3 className="text-lg font-bold mb-4">The Quest for Legitimacy</h3>
+            <h3 className="text-base font-bold mb-4">The Quest for Legitimacy</h3>
             <p className="text-gray-300 text-sm">
               Guiding the Rising Generation of Prominent Families
             </p>
@@ -106,12 +106,12 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 pt-8 border-t border-gray-800">
+        <div className="mt-12 pt-8 border-t border-gray-700">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-center md:text-left">
-            <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-6 text-sm text-gray-400">
+            <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-2 text-sm text-gray-400">
               <p>© Copyright {currentYear} Quest for Legitimacy</p>
               <p className="hidden md:block">•</p>
-              <p>All Rights Reserved</p>
+              <p>All Rights Reserved.</p>
             </div>
             <div className="flex flex-wrap justify-center md:justify-end space-x-6 text-sm">
               <Link href="/cookies" className="text-gray-400 hover:text-white transition-colors">

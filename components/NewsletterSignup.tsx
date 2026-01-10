@@ -19,9 +19,9 @@ export default function NewsletterSignup() {
   };
 
   return (
-    <section className="bg-gray-100 py-16">
+    <section className="bg-[#E37E33] py-16">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">
+        <h2 className="text-3xl font-bold text-white mb-8">
           Sign up for updates about our events and experiences
         </h2>
         <form onSubmit={handleSubmit} className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
@@ -31,21 +31,21 @@ export default function NewsletterSignup() {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
             required
-            className="px-6 py-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent flex-1 max-w-md"
+            className="px-6 py-3 rounded-md border-0 focus:ring-2 focus:ring-white focus:outline-none flex-1 max-w-md text-gray-900"
             disabled={status === 'loading'}
           />
           <button
             type="submit"
             disabled={status === 'loading'}
-            className="px-8 py-3 bg-blue-600 text-white rounded-md font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50"
+            className="px-8 py-3 bg-white text-[#E37E33] rounded-md font-semibold hover:bg-gray-100 transition-colors disabled:opacity-50"
           >
             {status === 'loading' ? 'Joining...' : 'Join'}
           </button>
         </form>
         {status === 'success' && (
-          <p className="mt-4 text-green-600 font-medium">Thank you for subscribing!</p>
+          <p className="mt-4 text-white font-medium">Thank you for subscribing!</p>
         )}
-        <p className="mt-4 text-sm text-gray-600">
+        <p className="mt-4 text-sm text-white/90">
           We won&apos;t send you spam. Unsubscribe at any time.
         </p>
       </div>
