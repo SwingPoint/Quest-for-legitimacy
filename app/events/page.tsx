@@ -76,13 +76,11 @@ export default function EventsPage() {
             {/* Right side - Illustration */}
             <div className="flex justify-center">
               <div className="relative w-full max-w-md">
-                {/* Placeholder for illustration - you can replace with actual image */}
-                <div className="aspect-square bg-gray-100 rounded-lg flex items-center justify-center">
-                  <div className="text-center p-8">
-                    <div className="text-6xl mb-4">🎯</div>
-                    <p className="text-2xl font-bold text-gray-700">Are You<br/>Ready?</p>
-                  </div>
-                </div>
+                <img 
+                  src="/images/Am I Enough.jpeg" 
+                  alt="Am I Enough" 
+                  className="w-full h-auto rounded-lg shadow-lg"
+                />
               </div>
             </div>
           </div>
