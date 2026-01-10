@@ -58,12 +58,16 @@ export default function TeamPage() {
                 }`}
               >
                 <div className={index % 2 === 1 ? 'lg:order-2' : ''}>
-                  <div className="w-full max-w-md mx-auto aspect-square bg-gray-200 rounded-lg flex items-center justify-center">
-                    <span className="text-gray-500">Photo of {member.name}</span>
+                  <div className="w-full max-w-md mx-auto aspect-square rounded-lg overflow-hidden shadow-xl">
+                    <img 
+                      src={member.image} 
+                      alt={member.name}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                 </div>
                 <div className={index % 2 === 1 ? 'lg:order-1' : ''}>
-                  <h5 className="text-sm font-semibold text-blue-600 uppercase tracking-wide mb-2">
+                  <h5 className="text-sm font-semibold text-indigo-600 uppercase tracking-wide mb-2">
                     {member.role}
                   </h5>
                   <h2 className="text-4xl font-bold text-gray-900 mb-2">{member.name}</h2>

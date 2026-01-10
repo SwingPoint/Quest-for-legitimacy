@@ -126,13 +126,12 @@ export default function HomePage() {
             {teamData.map((member) => (
               <article key={member.name} className="text-center group">
                 <div className="mb-6">
-                  <div className="w-56 h-56 mx-auto team-photo-placeholder relative">
-                    <div className="absolute inset-0 flex flex-col items-center justify-center p-6">
-                      <svg className="w-20 h-20 text-gray-300 mb-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
-                      </svg>
-                      <span className="text-xs text-gray-400 text-center">Add {member.name.split(' ')[0]}&apos;s photo here</span>
-                    </div>
+                  <div className="w-56 h-56 mx-auto relative overflow-hidden rounded-full shadow-xl">
+                    <img 
+                      src={member.image} 
+                      alt={member.name}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    />
                   </div>
                 </div>
                 <h5 className="text-sm font-semibold text-indigo-600 uppercase mb-2 tracking-wide">{member.role}</h5>
@@ -186,13 +185,12 @@ export default function HomePage() {
               </div>
             </div>
             <div className="flex justify-center">
-              <div className="w-72 h-[432px] image-placeholder rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-300">
-                <div className="relative w-full h-full flex flex-col items-center justify-center p-8">
-                  <svg className="w-24 h-24 text-gray-300 mb-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
-                  </svg>
-                  <span className="text-sm text-gray-400 text-center">Add book cover image here<br/>(3:4 ratio)</span>
-                </div>
+              <div className="w-72 h-[432px] rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-300 overflow-hidden">
+                <img 
+                  src="/images/book-cover.svg" 
+                  alt="The Quest for Legitimacy Book Cover"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </div>

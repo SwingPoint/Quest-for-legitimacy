@@ -1,0 +1,33 @@
+<svg width="600" height="800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bookGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e40af;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Book cover background -->
+  <rect width="600" height="800" fill="url(#bookGrad)"/>
+  
+  <!-- Book spine shadow -->
+  <rect x="0" y="0" width="40" height="800" fill="rgba(0,0,0,0.2)"/>
+  
+  <!-- Decorative elements -->
+  <circle cx="300" cy="200" r="80" fill="rgba(255,255,255,0.1)" />
+  <circle cx="300" cy="200" r="60" fill="rgba(255,255,255,0.15)" />
+  
+  <!-- Title -->
+  <text x="300" y="360" font-family="Georgia, serif" font-size="48" fill="white" text-anchor="middle" font-weight="bold">The Quest for</text>
+  <text x="300" y="420" font-family="Georgia, serif" font-size="48" fill="white" text-anchor="middle" font-weight="bold">Legitimacy</text>
+  
+  <!-- Subtitle -->
+  <text x="300" y="480" font-family="Inter, Arial, sans-serif" font-size="20" fill="rgba(255,255,255,0.9)" text-anchor="middle">How Children of Prominent Families</text>
+  <text x="300" y="510" font-family="Inter, Arial, sans-serif" font-size="20" fill="rgba(255,255,255,0.9)" text-anchor="middle">Discover Their Unique Place</text>
+  <text x="300" y="540" font-family="Inter, Arial, sans-serif" font-size="20" fill="rgba(255,255,255,0.9)" text-anchor="middle">in the World</text>
+  
+  <!-- Author -->
+  <text x="300" y="650" font-family="Inter, Arial, sans-serif" font-size="28" fill="white" text-anchor="middle" font-weight="600">Dr. Jamie Weiner</text>
+  
+  <!-- Publisher -->
+  <text x="300" y="740" font-family="Inter, Arial, sans-serif" font-size="18" fill="rgba(255,255,255,0.7)" text-anchor="middle">WILEY</text>
+</svg>

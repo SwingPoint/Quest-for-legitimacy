@@ -56,8 +56,12 @@ export default function BookPage() {
               </Link>
             </div>
             <div className="flex justify-center">
-              <div className="w-80 h-[480px] bg-blue-800 rounded-lg flex items-center justify-center shadow-2xl">
-                <span className="text-blue-300">Book Cover Image</span>
+              <div className="w-80 h-[480px] rounded-xl shadow-2xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                <img 
+                  src="/images/book-cover.svg" 
+                  alt="The Quest for Legitimacy Book Cover"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </div>
