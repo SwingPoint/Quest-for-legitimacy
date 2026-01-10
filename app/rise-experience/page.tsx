@@ -36,129 +36,138 @@ export default function RiseExperiencePage() {
     <>
       <JsonLd data={courseSchema} />
 
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-indigo-600 to-blue-700 text-white py-20 lg:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl lg:text-6xl font-bold mb-6">
-            The RISE Experience
-          </h1>
-          <p className="text-xl lg:text-2xl text-blue-100 max-w-3xl mx-auto">
-            Take the first steps on Your Quest
-          </p>
+      {/* Hero Section with desert/mountain background */}
+      <section className="relative bg-cover bg-center py-32 lg:py-40" style={{backgroundImage: "url('https://images.unsplash.com/photo-1509316785289-025f5b846b35?q=80&w=2000')"}}>
+        <div className="absolute inset-0 bg-black/40"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <h1 className="text-5xl lg:text-7xl font-bold text-white mb-8 leading-tight" style={{fontFamily: 'Georgia, serif', fontStyle: 'italic', fontWeight: 400}}>
+              Are you ready<br />to RISE?
+            </h1>
+          </div>
         </div>
       </section>
 
       {/* Main Content */}
       <section className="py-16 lg:py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="prose prose-lg max-w-none">
-            <h2 className="text-4xl font-bold text-gray-900 mb-8">
-              A Personal Development Program for the Rising Generation
-            </h2>
-            
-            <p className="text-xl text-gray-700 leading-relaxed mb-8">
-              The RISE Experience is an in-depth personal development program that will help you navigate your 
-              personal Quest. We guide you through the action steps needed to uncover your true path and understand 
-              the impact you can have in the world.
-            </p>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto">
+            <div className="bg-gray-700 text-white p-8 lg:p-12 rounded-lg mb-16">
+              <h2 className="text-3xl lg:text-4xl font-bold mb-6">
+                JOIN THE RISE EXPERIENCE
+              </h2>
+              
+              <div className="space-y-4 text-base lg:text-lg leading-relaxed mb-8">
+                <p>
+                  This impactful cohort based program delivers a transformational and immersive experience that helps those who have grown up in prominent families to take ownership of their own lives.
+                </p>
+                <p>
+                  Our focus is to support you in deepening your understanding of the impact you want to have.
+                </p>
+                <p>
+                  Guiding you through your own journey we'll explore the four phases of your Quest for Legitimacy and help you discover your unique place in the world.
+                </p>
+              </div>
 
-            <div className="bg-blue-50 border-l-4 border-blue-600 p-6 my-8">
-              <p className="text-lg font-semibold text-gray-900 mb-2">
-                Who is RISE designed for?
-              </p>
-              <p className="text-gray-700">
-                The RISE Experience is designed for the Rising Generation - those growing up in the shadow of 
-                significant family members, businesses, wealth, or reputation who want to discover their own 
-                legitimacy and purpose.
+              <a
+                href="https://forms.monday.com/forms/c095e0a4ef29862a15177e1a5a008fec?r=use1"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 border-2 border-white text-white font-semibold rounded-md hover:bg-white hover:text-gray-700 transition-all duration-200"
+              >
+                <span>Join the Waiting List</span>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            </div>
+
+            {/* Orange CTA Button */}
+            <div className="text-center mb-16">
+              <a
+                href="https://forms.monday.com/forms/c095e0a4ef29862a15177e1a5a008fec?r=use1"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-orange inline-block"
+              >
+                Join the Waiting List!
+              </a>
+            </div>
+
+            {/* Who is it for? */}
+            <div className="mb-16">
+              <h2 className="text-4xl font-bold text-gray-900 mb-6" style={{fontFamily: 'Georgia, serif', fontStyle: 'italic'}}>
+                Who is it for?
+              </h2>
+              <div className="space-y-4 text-lg text-gray-700 leading-relaxed">
+                <p>
+                  Growing up in a prominent family can leave you feeling isolated and wondering how you'll measure up to the achievements of the giants in your life. <strong>You are not alone.</strong>
+                </p>
+                <p>
+                  The RISE Experience is designed specifically to help you and others like you understand your identity and discover your unique place in the world.
+                </p>
+              </div>
+            </div>
+
+            {/* Teal CTA Section */}
+            <div className="bg-[#3C5F5E] text-white p-8 lg:p-12 rounded-lg mb-16">
+              <h2 className="text-3xl font-bold mb-6 uppercase">
+                REGISTER YOUR INTEREST IN JOINING ONE OF OUR COHORTS
+              </h2>
+              <a
+                href="https://forms.monday.com/forms/c095e0a4ef29862a15177e1a5a008fec?r=use1"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 border-2 border-white text-white font-semibold rounded-md hover:bg-white hover:text-[#3C5F5E] transition-all duration-200"
+              >
+                <span>Join the Waiting List!</span>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            </div>
+
+            {/* How do I find out more? */}
+            <div className="mb-16">
+              <h2 className="text-4xl font-bold text-gray-900 mb-6" style={{fontFamily: 'Georgia, serif', fontStyle: 'italic'}}>
+                How do I find out more?
+              </h2>
+              <p className="text-lg text-gray-700 leading-relaxed">
+                If you would like to find out more about the program and if it is right for you, we would love to hear from you. You can{' '}
+                <Link href="/contact" className="text-[#E37E33] hover:underline font-semibold">
+                  contact us
+                </Link>{' '}
+                directly and we'd be happy to answer any questions you may have.
               </p>
             </div>
 
-            <h3 className="text-3xl font-bold text-gray-900 mt-12 mb-6">
-              What You&apos;ll Discover
-            </h3>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-              <div className="bg-gray-50 p-6 rounded-lg">
-                <h4 className="text-xl font-semibold text-gray-900 mb-3">Your Unique Path</h4>
-                <p className="text-gray-700">
-                  Uncover your authentic journey separate from your family&apos;s legacy while honoring their 
-                  accomplishments.
-                </p>
-              </div>
-              <div className="bg-gray-50 p-6 rounded-lg">
-                <h4 className="text-xl font-semibold text-gray-900 mb-3">Your Impact</h4>
-                <p className="text-gray-700">
-                  Understand the meaningful contribution you can make to your family and the world around you.
-                </p>
-              </div>
-              <div className="bg-gray-50 p-6 rounded-lg">
-                <h4 className="text-xl font-semibold text-gray-900 mb-3">Your Community</h4>
-                <p className="text-gray-700">
-                  Connect with like-minded individuals facing similar challenges in a supportive, understanding 
-                  environment.
-                </p>
-              </div>
-              <div className="bg-gray-50 p-6 rounded-lg">
-                <h4 className="text-xl font-semibold text-gray-900 mb-3">Your Agency</h4>
-                <p className="text-gray-700">
-                  Gain the tools and confidence to take ownership of your life and pursue your purpose with clarity.
-                </p>
-              </div>
+            {/* Quest Readiness Quiz */}
+            <div className="bg-orange-50 p-8 lg:p-12 rounded-lg text-center">
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4" style={{fontFamily: 'Georgia, serif', fontStyle: 'italic', color: '#E37E33'}}>
+                Are you ready to take Your Quest?
+              </h2>
+              <p className="text-lg text-gray-700 mb-6">
+                Follow this link to complete our readiness quiz!
+              </p>
+              <a
+                href="https://questreadiness.scoreapp.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-orange inline-block"
+              >
+                Click Here
+              </a>
             </div>
 
-            <h3 className="text-3xl font-bold text-gray-900 mt-12 mb-6">
-              Program Offerings
-            </h3>
-
-            <p className="text-lg text-gray-700 mb-6">
-              Beyond the core RISE Experience, we are available to deliver:
-            </p>
-
-            <ul className="space-y-4 text-lg text-gray-700 mb-8">
-              <li className="flex items-start">
-                <svg className="h-6 w-6 text-blue-600 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span><strong>Workshops</strong> - Interactive sessions on navigating the challenges of prominent families</span>
-              </li>
-              <li className="flex items-start">
-                <svg className="h-6 w-6 text-blue-600 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span><strong>&apos;Meet the Author&apos; Dinners</strong> - Intimate conversations with Dr. Jamie Weiner</span>
-              </li>
-              <li className="flex items-start">
-                <svg className="h-6 w-6 text-blue-600 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span><strong>Keynotes</strong> - Inspiring presentations on the Quest for Legitimacy research</span>
-              </li>
-              <li className="flex items-start">
-                <svg className="h-6 w-6 text-blue-600 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span><strong>Adviser Training</strong> - Professional development for family business advisers</span>
-              </li>
-            </ul>
-
-            <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-8 rounded-lg my-12 text-center">
-              <h3 className="text-3xl font-bold mb-4">Ready to Begin Your Quest?</h3>
-              <p className="text-xl text-blue-100 mb-6">
-                Join a global community of next generation leaders discovering their own legitimacy
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                  href="/events"
-                  className="inline-block px-8 py-3 bg-white text-blue-700 font-semibold rounded-md hover:bg-gray-100 transition-colors"
-                >
-                  View Upcoming Events
-                </Link>
-                <Link
-                  href="/contact"
-                  className="inline-block px-8 py-3 border-2 border-white text-white font-semibold rounded-md hover:bg-white hover:text-blue-700 transition-colors"
-                >
-                  Contact Us
-                </Link>
+            {/* Testimonials */}
+            <div className="mt-16">
+              <h2 className="text-4xl font-bold text-gray-900 mb-8 text-center" style={{fontFamily: 'Georgia, serif', fontStyle: 'italic'}}>
+                What Others Have Said:
+              </h2>
+              <div className="bg-gray-50 p-8 rounded-lg">
+                <blockquote className="text-lg text-gray-700 italic text-center leading-relaxed">
+                  &quot;Here's a big thank you to the Quest for Legitimacy team for setting an environment for deep internal work I didn't know I needed. And for giving us tools to go on and be guides on the Quest for Legitimacy.&quot;
+                </blockquote>
               </div>
             </div>
           </div>
