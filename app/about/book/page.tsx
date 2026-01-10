@@ -60,7 +60,7 @@ export default function BookPage() {
             <div className="flex justify-center">
               <div className="w-80 h-[480px] rounded-xl shadow-2xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
                 <img 
-                  src="/images/book-cover.svg" 
+                  src="/images/book-cover/QFL Book Cover.JPG" 
                   alt="The Quest for Legitimacy Book Cover"
                   className="w-full h-full object-cover"
                 />

@@ -186,7 +186,7 @@ export default function HomePage() {
             <div className="flex justify-center order-1 lg:order-2">
               <div className="w-64 h-96 rounded-lg shadow-xl overflow-hidden">
                 <img 
-                  src="/images/book-cover.svg" 
+                  src="/images/book-cover/QFL Book Cover.JPG" 
                   alt="The Quest for Legitimacy Book Cover"
                   className="w-full h-full object-cover"
                 />
